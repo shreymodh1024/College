@@ -98,8 +98,8 @@ int main(){
         case 4: change(); break;
         case 5: printf("program end\n"); break;
         default: printf("invalid choice\n");
-
     }
+    
   }
     
 }
