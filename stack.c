@@ -1,105 +1,74 @@
 #include<stdio.h>
-#define N 5
+#define MAX 5
+int arr[MAX], top = -1;
 
-int s[N];
-int top = 0;
- 
-//to insert by function
-// void push(int x){
-//     if(top >= N){
-//         printf("stack overflow\n");
-//         return;
-//     }
-//     top++;
-//     s[top] = x;
-//     printf("%d inserted\n",x);
-// }
-
-//to insert by taking input from user
-void push(){
-    int x;
-    if(top >= N){
+void push(int x){
+    //checking overflow
+    if(top == MAX-1){
         printf("stack overflow\n");
-        return;
     }
 
-    printf("Enter value: ");
-    scanf("%d", &x);
-    top++;
-    s[top] = x;
-    printf("%d inserted\n",x);
+    else{
+        top++;
+        arr[top] = x;
+        printf("%d is inserted\n", arr[top]);
+    }
 }
 
-//to delete from stack
 void pop(){
-    int x;
-    if(top == 0){
-        printf("underflow\n");
-        return;
+    //checking underflow
+    if(top == -1){
+        printf("stack underflow\n");
     }
-    top--;
-    x = s[top+1];//it is the value which is deleted
-    printf("%d deleted\n",x);
+
+    else{
+        int a = arr[top];
+        top--;
+        printf("%d is deleted\n", a);
+    }
 }
 
-//to see any value of element
-void peep(){
-    int I;
-    printf("enter position I: ");
-    scanf("%d", &I);
-
-    //to check for underflow condition
-    if(top - I + 1 <= 0){
-        printf("stack underflow");
-        return;
+void peep(int pos){
+    //checking invalid index input
+    int index = top - pos + 1;
+    if(index < 0 || index > top){
+        printf("invalid position! Cannot peep at pos %d\n", pos);
     }
-    printf("element @ position %d = %d\n", I, s[top-I+1]);
-    //return s[top - I + 1];can't return in this format
+
+    //printing position
+    else{
+        printf("value at pos %d is %d\n", pos, arr[index]);
+    }
 
 }
 
-//to change a specific value
-void change(){
-    int I;
-    printf("position I: ");
-    scanf("%d", &I);
-
-    //to check for underflow
-    if(top-I+1 <= 0){
-        printf("stack underflow");
-        return;
+void change(int pos, int value){
+    int index = top - pos + 1;
+    if(index < 0 || index > top){
+        printf("invalid position! Cannot peep at pos %d\n", pos);
     }
 
-    int x;
-    printf("enter new element: ");
-    scanf("%d", &x);
-    s[top-I+1] = x;
-    printf("element changed\n");
-
-    
+    //changing value
+    else{
+        arr[index] = value;
+        printf("at pos %d, value changed to %d\n",pos, arr[index]);
+    }
 }
 
 int main(){
-  int choice;
-  while(1){
-    printf("\n...menu...\n");
-    printf("1. Push\n");
-    printf("2. pop\n");
-    printf("3. peep\n");
-    printf("4. change\n");
-    printf("5. exit\n");
-    printf("enter choice: ");
-    scanf("%d", &choice);
-
-    switch(choice){
-        case 1: push(); break;
-        case 2: pop(); break;
-        case 3: peep(); break;
-        case 4: change(); break;
-        case 5: printf("program end\n"); break;
-        default: printf("invalid choice\n");
-    }
-    
-  }
+   
+       push(11);
+       push(12);
+       push(13);
+       push(14);
+       push(15);
+       push(16);
+       push(17);
+       
+       push(20);
+       peep(0);
+       peep(2);
+       change(2, 22);
+       peep(2);
     
 }
