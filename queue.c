@@ -1,50 +1,50 @@
-#include<stdio.h>
-#define N 5
-//int N = 5;
-int q[N];
-int f = 0, r = 0;
+#include <stdio.h>
+#define MAX 5
+int arr[MAX];
+int rear = -1, front = -1;
 
-void insert(int y){
-    if(r >= N){
+void enqueue(int value){
+    if(rear == MAX-1){
         printf("queue overflow\n");
         return;
     }
-    q[r] = y;
-    r++;
-    
-
-    // if(f == 0){
-    //     f = 1;
-    // } // what is the requirement of this
-
-    printf("%d inserted\n", y);
+    if(front == -1){
+        front = 0;
+    }
+    rear++;
+    printf("rear = %d xx ",rear);
+    arr[rear] = value;
+    printf("%d inserted in queue\n",arr[rear]);
 }
 
-void delete(){
-    int y;
-    if(q[f] == 0){
+void dequeue(){
+    //checking underflow
+    if(front == -1 || front > rear){
         printf("queue underflow\n");
         return;
     }
+    printf("%d deleted from queue\n", arr[front]);
+    front++;
+}
 
-    y = q[f];
-
-    if(f == r){
-        f = 0;
-        r = 0;
+void display(){
+    //checking underflow
+    if(front == -1 ){
+        printf("queue is empty!\n");
+        return;
     }
-    else {f++;}
-    printf("%d deleted\n", y);
+    printf("queue elements are: ");
+    for(int i = front; i<= rear; i++){
+        printf("%d ",arr[i]);
+    }
 }
 
 int main(){
-
-    insert(10);
-    insert(20);
-    insert(30);
-    insert(40);
-    insert(50);
-    insert(60);//queue overflow
-    delete();
-    delete();
+    // enqueue(32);
+    // enqueue(33);
+    // enqueue(34);
+    // dequeue();
+    // dequeue();
+    // dequeue();
+    display();
 }
