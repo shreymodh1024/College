@@ -1,25 +1,24 @@
 #include<stdio.h>
 int main(){
-
-    int a[6] = {7,4,9,2,6,1};
     int n = 6;
-    int temp, min;
+    int arr[] = {7,4,9,2,6,1};
 
     for(int i = 0; i< n-1; i++){
-        min = i;
-        for(int j = i+1; j<n; j++){
-            if(a[j] < a[min]){min = j;}
+        int min = i;
+        for(int j = i+1; j< n; j++){
+            if(arr[j]< arr[min]){
+                min = j;
+            }
         }
-        if(min != i){
-            temp = a[i];
-            a[i]= a[min];
-            a[min] = temp;
-        }
+        //swapping
+        int temp = arr[i];
+        arr[i] = arr[min];
+        arr[min] = temp;
     }
 
-    //printing the sorted array
-    for(int i = 0; i < n; i++){
-        printf("%d ", a[i]);
-    }
-    printf("\n");
+    //printing array
+    printf("modified array is: ");
+    for(int i = 0; i<6; i++){
+        printf("%d ", arr[i]);
+    } printf("\n");
 }
