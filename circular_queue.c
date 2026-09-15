@@ -1,55 +1,75 @@
 #include<stdio.h>
-# define N 6
-int Q[N];
-int F = 0;
-int R = 0;
+#define MAX 5
+int arr[MAX];
+int front = -1, rear = -1;
 
-void insert(int y){//ERROR
-    if(R == N) R = 1;
-    else R = R + 1;
-    printf("r = %d\n", R);
-    printf("f = %d\n", F);
+void enqueue(int value){
 
-    if(F == R){
-        printf("Queue overflow\n");
+    //checking overflow
+    if((rear == MAX-1 && front == 0) || (rear+1 == front)){
+        printf("queue overflow\n");
         return;
     }
 
-    Q[R] = y;
-    if(F == 0) F = 1;  
-    printf("%d is inserted\n", y);
+
+    //checking if front pointer properly set?
+    if(front == -1){
+        front = 0;
+    }
+    if(rear == MAX-1){
+        rear = 0;
+    }
+    else{
+        rear = rear + 1;
+    }
+    arr[rear] = value;
+    printf("%d inserted in queue\n", arr[rear]);
 }
 
-void delete(){
-    int y;
-    if(F == 0){
-        printf("underflow\n");
-        return;
-    }
-    y = Q[F];
+void dequeue(){
 
-    if(F == R){
-        F = 0;
-        R = 0;
-        printf("%d deleted from Queue\n", y);
+    //s1 checking underflow
+    if(front == -1){
+        printf("queue is empty\n");
         return;
     }
 
-    if(F == N) F = 1;
-    else F = F + 1;
+    //s2 delete element
+    printf("%d deleted from queue\n", arr[front]);
 
-    printf("%d deleted from Queue\n", y);
+    //s3 queue empty check
+    if(front == rear){
+        front = -1; rear = -1;
+        return;
+    }
 
-    
+    //s4 increment front pointer
+    else if (front == MAX -1){
+        front = 0;
+    }
+    else front = front + 1;
+}
+
+void display()
+{
+
+for(int i=front;i!=rear;i=(i+1)%MAX)
+{
+printf("%d\t",arr[i]);
+}
+printf("%d",arr[rear]);
 }
 
 int main(){
-    insert(10);
-    insert(20);
-    insert(30);
-    insert(40);
-    insert(50);
-    insert(60);
-    // delete();
+    enqueue(11);
+    enqueue(12);
+    enqueue(13);
+    enqueue(14);
+    enqueue(15);
+    enqueue(16);
+    dequeue();
+    enqueue(16);
+    display();
    
 }
+
